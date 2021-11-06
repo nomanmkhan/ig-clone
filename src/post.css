@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightgrey;
+    padding:10px
+  }
+  
+.post-img{
+    width: 100%;
+    object-fit: contain;
+    max-width: 600px;
+    pointer-events: none;
+  
+}
+
+.comment{
+    font-size: 12px;
+}
+
+.loader{
+    display: flex;
+    justify-content: center;
+}

@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+* {
+  margin: 0px;
+}
+.app{
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  height: 100vh;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo{
+  object-fit: contain;
+
+}
+.header{
+  height: 6%;
+  background-color: #fff;
+  padding: 20px 20px 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.body{
+  overflow-y: scroll;
+  /* height: 90% !important; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.footer{
+  height: 4%;
+}
+
+
+.form-singup{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.ant-input:focus{
+  outline: 0;
+  box-shadow: none;
+}
+
+.ant-input{
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+
+.signup{
+  border-top: 0px !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+}
+
+.bg{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 50%;
+  /* justify-content: center; */
+  height: 94vh;
+  background-color: #EEEEEE;
+  -webkit-clip-path: polygon(0 0%, 100% 0%, 100% 50%, 0% 100%);
+}
+
+.bg-btn{
+  display: flex;
+  padding: 10px;
+}
+
+.btn{
+  margin: 0 5px;
+  width: 100%;
+
+  border-radius: 15px !important
+}
+
+.uploadImage-container{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: #fafafa;
 }
 
-.App-link {
-  color: #61dafb;
+.upload-btn{
+  background: #fafafa !important;
+  border: none !important
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.uploadForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ant-upload-list-picture-card-container{
+  width: 100% !important;
+  height: 100% !important;
 }
