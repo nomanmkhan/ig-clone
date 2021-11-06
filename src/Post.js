@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import "./post.css"
-import { Avatar } from 'antd';
+import { Avatar, Input } from 'antd';
 import moment from "moment";
-import { ClockCircleOutlined } from '@ant-design/icons';
+import { ClockCircleOutlined, SendOutlined } from '@ant-design/icons';
 import Loader from "react-loader-spinner";
-import { collection, onSnapshot, orderBy, query, doc, where, getDoc,getDocFromCache  } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, setDoc, serverTimestamp, doc } from "firebase/firestore";
 import { db } from "../src/firebase";
+import short from 'short-uuid';
 
-function Post({ data, postId }) {
-    console.log("postId", postId);
+function Post({ data, postId, user }) {
     let time = moment.unix(data?.timestamp?.seconds);
     const [load, setLoad] = useState(false);
-    const [comment, setComments] = useState();
+    const [comments, setComments] = useState();
+    const [comment, setComment] = useState();
 
     useEffect(async () => {
-        let unsubscribe;
         if (postId) {
-            let q = doc(db, 'posts', postId);
-            const docSnap = await getDoc(q);
-            console.log("docSnap", docSnap.data());
-            // let newQ = query(collection(docSnap.data(), "comments"))
-            // let snap = onSnapshot(newQ, (snapshot) => {
-            //     console.log("snap: ", snapshot);
-            // })
+            let q = query(collection(db, "posts", postId, "comments"), orderBy('timestamp', 'desc'));
+            const unsubscribe = await onSnapshot(q, (snap) => {
+                setComments(snap.docs.map((doc) => doc.data()));
+            });
+
+            // const q = query(collection(db, "posts"), orderBy('timestamp', 'desc'));
+            // const unsubscribe = await onSnapshot(q, (querySnapshot) => {
+            //   setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
+            // });
+
         }
     }, [])
 
@@ -35,6 +38,22 @@ function Post({ data, postId }) {
         setTimeout(() => {
             setLoad(false)
         }, 1200);
+    }
+
+    const sendComment = async () => {
+        if (comment === '') {
+            alert("text is required")
+        }
+        let docData = {
+            timestamp: serverTimestamp(),
+            username: user.displayName,
+            text: comment,
+        }
+        let q = query(collection(db, "posts", postId, "comments"));
+        await setDoc(doc(db, "posts", postId, "comments"), short.generate(), docData);
+        // await setDoc(doc(db, "posts", short.generate()), docData);
+
+
     }
     return (
         <div className="container">
@@ -60,8 +79,24 @@ function Post({ data, postId }) {
 
             <div style={{ padding: "10px 10px 0 10px" }}>
                 <p className="comment" > <span><ClockCircleOutlined /></span>  {moment(time).fromNow()}</p>
-                <p className="comment"><strong>{data.username}</strong> {data.caption}</p>
+                <p className="comment"><strong>{data?.username}</strong> {data?.caption}</p>
+                {comments && comments.map(single => {
+                    return (
+                        <p><strong>{single?.username}</strong> {single?.text}</p>
+                    )
+                })}
             </div>
+            <form onSubmit={(e) => { e.preventDefault(); sendComment(comment) }}>
+                <Input
+                    suffix={<SendOutlined onClick={() => { sendComment(comment.trim()) }} />}
+                    defaultValue=""
+                    type="comment"
+                    placeholder="Comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                />
+            </form>
+
         </div>
     )
 }

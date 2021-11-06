@@ -36,9 +36,6 @@ function App() {
     const q = query(collection(db, "posts"), orderBy('timestamp', 'desc'));
     const unsubscribe = await onSnapshot(q, (querySnapshot) => {
       setPosts(querySnapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
-      // querySnapshot.docs.map( doc => {
-      //   setPosts((post)=> [doc.data(), ...post, ]);
-      // })
     });
 
   }, [user]);
@@ -160,7 +157,7 @@ function App() {
           user &&
           posts.map(({ id, post }) => {
             return (
-              <Post data={post} key={id} postId={id} />
+              <Post user={user} data={post} key={id} postId={id} />
             )
           })
 
