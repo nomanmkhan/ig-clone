@@ -6,8 +6,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { Modal, Button, Input } from 'antd';
 import ImageUpload from "./ImageUpload";
-import Loader from "react-loader-spinner";
-
+import CustomScroll from 'react-custom-scroll';
 function App() {
   const auth = getAuth();
   const [posts, setPosts] = useState([]);
