@@ -152,25 +152,27 @@ function App() {
         }
 
       </div>
-      <div className="body" style={{ height: user === null ? "94vh" : "90vh" }} >
-        {
-          user &&
-          posts.map(({ id, post }) => {
-            return (
-              <Post user={user} data={post} key={id} postId={id} />
-            )
-          })
+      <div className="bodyContainer">
+        <div className="body" style={{ height: user === null ? "94vh" : "90vh" }} >
+          {
+            user &&
+            posts.map(({ id, post }) => {
+              return (
+                <Post user={user} data={post} key={id} postId={id} />
+              )
+            })
 
-        }
-        {!user &&
-          <div className="bg" >
-            <h3 style={{ paddingLeft: "15px" }}>Please complete your action</h3>
-            <div className="bg-btn">
-              <Button className="btn" type="primary" onClick={loginkey}>Log In</Button>
-              <Button className="btn" type="primary" onClick={() => setVisible(true)}> Sign Up</Button>
+          }
+          {!user &&
+            <div className="bg" >
+              <h3 style={{ paddingLeft: "15px" }}>Please complete your action</h3>
+              <div className="bg-btn">
+                <Button className="btn" type="primary" onClick={loginkey}>Log In</Button>
+                <Button className="btn" type="primary" onClick={() => setVisible(true)}> Sign Up</Button>
+              </div>
             </div>
-          </div>
-        }
+          }
+        </div>
       </div>
       {
         user !== null &&

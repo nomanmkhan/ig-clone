@@ -22,10 +22,16 @@
   border-bottom: 1px solid lightgrey;
   align-items: center;
 }
-
+.bodyContainer{
+  display: flex;
+  justify-content: center;
+}
 .body{
   overflow-y: scroll;
   /* height: 90% !important; */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .footer{
@@ -61,7 +67,9 @@
   flex-direction: column;
   align-items: flex-start;
   padding-top: 50%;
+  overflow-y: none;
   /* justify-content: center; */
+  min-width: 600px;
   height: 94vh;
   background-color: #EEEEEE;
   -webkit-clip-path: polygon(0 0%, 100% 0%, 100% 50%, 0% 100%);

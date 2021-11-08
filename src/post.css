@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid lightgrey;
-    padding:10px
+    padding:10px;
+    border-left: 1px solid  lightgray;
+    border-right: 1px solid  lightgray;
   }
   
 .post-img{
@@ -15,9 +17,25 @@
 
 .comment{
     font-size: 12px;
+    /* margin: 5px 0; */
+}
+.footer-post{
+    max-width: 600px;
+}
+.comments{
+    font-size: 13px;
+    margin: 5px 0;
 }
 
 .loader{
     display: flex;
     justify-content: center;
+}
+
+.subComment{
+    font-size: 11px;
+}
+
+.ant-divider-horizontal {
+    margin: 10px 0 !important;
 }
