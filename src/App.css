@@ -25,9 +25,9 @@
 .bodyContainer{
   display: flex;
   justify-content: center;
+  overflow-y: auto;
 }
 .body{
-  overflow-y: auto;
   /* height: 90% !important; */
   display: flex;
   flex-direction: column;

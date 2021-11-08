@@ -31,7 +31,7 @@ function Post({ data, postId, user }) {
         setLoad(true);
         setTimeout(() => {
             setLoad(false)
-        }, 1500);
+        }, 1000);
     }
 
     const sendComment = () => {
@@ -74,14 +74,14 @@ function Post({ data, postId, user }) {
             }
             <div className="footer-post">
                 <div style={{ padding: "10px 10px 0 10px" }}>
-                    <p className="comments" > <span><ClockCircleOutlined /></span>  {moment(time).fromNow()}</p>
+                    <p className="comments" > <span><ClockCircleOutlined /></span>  {moment(time).fromNow() === "Invalid date" ? null : moment(time).fromNow()}</p>
                     <p className="comments"><strong>{data?.username}</strong> {data?.caption}</p>
                     <Divider />
                     {comments && comments.map(single => {
                         let time = moment.unix(single?.timestamp?.seconds);
                         return (
                             <div>
-                                <p className="comment"> <strong>{single?.username}</strong> {single?.text} - <span className="subComment" >{moment(time).fromNow()}</span></p>
+                                <p className="comment"> <strong>{single?.username}</strong> {single?.text} - <span className="subComment" >{moment(time).fromNow() === "Invalid date" ? null : moment(time).fromNow()}</span></p>
                             </div>
 
                         )

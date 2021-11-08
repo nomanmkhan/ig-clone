@@ -151,8 +151,8 @@ function App() {
         }
 
       </div>
-      <div className="bodyContainer">
-        <div className="body" style={{ height: user === null ? "94vh" : "90vh" }} >
+      <div className="bodyContainer" style={{ height: user === null ? "94vh" : "90vh" }}>
+        <div className="body"  >
           {
             user &&
             posts.map(({ id, post }) => {
